@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Sixtyfour+Convergence&display=swap');
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   margin: 0;
   padding: 0;
   height: 100%;
