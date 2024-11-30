@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 
 // Importing the index router
 const indexRouter = require('./routes/index');
+const allInventoryItemsRouter = require('./routes/inventoryItem/allInventoryItems');
 
 // Variable declaration for the express app
 let app = express();
@@ -54,6 +55,7 @@ app.use(cookieParser());
 
 // Routing configuration
 app.use('/api', indexRouter);
+app.use('/api/items', allInventoryItemsRouter);
 
 // Use the error handling middleware
 app.use(notFoundHandler);

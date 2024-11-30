@@ -25,10 +25,11 @@ let inventoryItemSchema = new Schema({
   },
   quantity: {
     type: Number,
+    required: true,
     min: 0,
   },
   price: {
-    type: Decimal128,
+    type: Number,
     required: true,
   },
   dateCreated: {
