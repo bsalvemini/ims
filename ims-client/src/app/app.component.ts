@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,7 +9,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   template: `
     <div class="app-container">
       <header class="header-content">
-        <div class="header-title">IMS</div>
+        <div class="header-title">{{ title }}</div>
         <input type="text" placeholder="Search inventory item.." class="search-inventory-item">
       </header>
       <nav class="side-menu">
@@ -20,7 +19,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
             <img src="assets/up-arrow.png" alt="up arrow" class="arrow" *ngIf="this.invItemLinksVisible">
         </div>
         <div class="menu-sub-link" *ngIf="this.invItemLinksVisible">
-          <a href="">Create Inventory Item</a>
+          <a routerLink="/create-inventory-item">Create Inventory Item</a>
           <a href="">List Item By ID</a>
           <a href="">Update Inventory Item</a>
           <a href="">Delete Inventory Item</a>
@@ -48,7 +47,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      text-align: center;
       padding: 0;
       margin: 0 auto;
     }
@@ -57,6 +55,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       background-color: #000;
       color: #FFF;
       padding: 10px 0;
+      text-align: center;
     }
 
     .main-container {
@@ -73,6 +72,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       padding: 10px;
       font-size: 1.25em;
       border-bottom: 1px solid rgba(33, 35, 38, 0.1);
+      background-color: #FFF;
     }
 
     .header-title {
@@ -159,7 +159,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   `
 })
 export class AppComponent {
-  title = 'ets-client';
+  title = 'IMS';
   invItemLinksVisible: boolean = false;
   suppLinksVisible: boolean = false;
 

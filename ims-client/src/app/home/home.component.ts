@@ -7,10 +7,16 @@ import { environment } from '../../environments/environment';
   standalone: true,
   imports: [],
   template: `
-    <h2>Welcome to the Inventory Management System</h2>
-    <p>Choose an option from the list on the left to get started.</p>
+    <div class="home-container">
+      <h2>Welcome to the Inventory Management System</h2>
+      <p>Choose an option from the list on the left to get started.</p>
+    </div>
   `,
-  styles: ``
+  styles: `
+    .home-container {
+      text-align: center;
+    }
+  `
 })
 export class HomeComponent {
 }
