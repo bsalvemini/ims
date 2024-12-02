@@ -23,7 +23,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           <a href="">List Item By ID</a>
           <a href="">Update Inventory Item</a>
           <a href="">Delete Inventory Item</a>
-          <a href="">List All Inventory Items</a>
+          <a routerLink="/inventory-items">List All Inventory Items</a>
         </div>
         <div class="menu-link" (click)="this.suppLinksVisible = !this.suppLinksVisible;">Suppliers
         <img src="assets/down-arrow.png" alt="up arrow" class="arrow" *ngIf="!this.suppLinksVisible">

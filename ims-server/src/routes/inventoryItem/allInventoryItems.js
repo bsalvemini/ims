@@ -5,7 +5,6 @@ const { InventoryItem } = require('../../models/inventoryItem');
 // API to list all inventory items
 router.get('/', async(req, res, next) => {
     try {
-        // const inventoryItems = await InventoryItem.find({});
         const inventoryItems = await InventoryItem.aggregate([
             {
               '$lookup': {
