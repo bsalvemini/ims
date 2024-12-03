@@ -16,6 +16,7 @@ const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const allInventoryItemsRouter = require('./routes/inventoryItem/allInventoryItems');
 const createInventoryItemRouter = require('./routes/inventoryItem/createInventoryItem');
+const updateInventoryItemRouter = require('./routes/inventoryItem/updateInventoryItems');
 const categoriesRouter = require('./routes/categories/index');
 const suppliersRouter = require('./routes/suppliers/index');
 
@@ -59,6 +60,7 @@ app.use(cookieParser());
 // Routing configuration
 app.use('/api', indexRouter);
 app.use('/api/items', allInventoryItemsRouter);
+app.use('/api/items', updateInventoryItemRouter);
 app.use('/api/create-inventory-item', createInventoryItemRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/suppliers', suppliersRouter);
