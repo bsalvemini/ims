@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 // Importing the index router
 const indexRouter = require('./routes/index');
 const allInventoryItemsRouter = require('./routes/inventoryItem/allInventoryItems');
-const createInventoryItemRouter = require('./routes/createInventoryItem/createInventoryItem');
+const createInventoryItemRouter = require('./routes/inventoryItem/createInventoryItem');
 const categoriesRouter = require('./routes/categories/index');
 const suppliersRouter = require('./routes/suppliers/index');
 
