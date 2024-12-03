@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateInventoryItemComponent } from './create-inventory-item.component';
 import { InventoryItemService } from '../inventory-item.service';
-import { AddInventoryItemDTO, InventoryItem } from '../inventory-item';
+import { AddInventoryItemDTO, InventoryItem } from '../../suppliers/inventory-item';
 
 describe('CreateInventoryItemComponent', () => {
   let component: CreateInventoryItemComponent;

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { InventoryItem } from '../inventoryItem/inventory-item';
+import { InventoryItem } from '../inventory-item';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-list-all-inventory-items',

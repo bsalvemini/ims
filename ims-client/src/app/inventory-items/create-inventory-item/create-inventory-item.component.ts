@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { AddInventoryItemDTO } from '../inventory-item';
 import { InventoryItemService } from '../inventory-item.service';
 import { Router, RouterLink } from '@angular/router';
 import { Category } from '../../categories/category';
 import { Supplier } from '../../suppliers/supplier';
+import { AddInventoryItemDTO } from '../inventory-item';
 
 @Component({
   selector: 'app-create-inventory-item',
