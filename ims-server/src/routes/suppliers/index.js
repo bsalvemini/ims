@@ -52,24 +52,7 @@ router.get('/', async(req, res, next) => {
  */
 router.get('/:supplierId', async(req, res, next) => {
   try {
-    const supplierId = req.params.supplierId;
-    const supplier = await Supplier.aggregate([
-      {
-        $match: { supplierId: supplierId }
-      },
-      {
-        $group: {
-          _id: '$supplierId',
-          supplierName: { $first: '$supplierName' }
-        }
-      },
-      {
-        $project: {
-          _id: 0,
-          supplierName: '$supplierName'
-        }
-      }
-    ]);
+    const supplier = await Supplier.findOne({supplierId: req.params.supplierId});
     res.send(supplier);
   } catch (err) {
     console.error('Error getting supplier', err);

@@ -26,10 +26,6 @@ import { SupplierService } from '../../suppliers/supplier.service';
             }
           </select>
         </div>
-        @if (updateInventoryItemForm.controls['category'].touched &&
-        updateInventoryItemForm.controls['category'].hasError('required')) {
-          <div class="alert">Category is required.</div>
-        }
         <div class="form-group">
           <label for="supplier">Supplier:</label>
           <select formControlName="supplier" name="supplier" class="select">
@@ -39,10 +35,6 @@ import { SupplierService } from '../../suppliers/supplier.service';
             }
           </select>
         </div>
-        @if (updateInventoryItemForm.controls['supplier'].touched &&
-        updateInventoryItemForm.controls['supplier'].hasError('required')) {
-          <div class="alert">Supplier is required.</div>
-        }
         <div class="form-group">
           <label for="name">Name:</label>
           <input type="text" name="name" id="name" placeholder="Enter the name" formControlName="name">
@@ -50,6 +42,11 @@ import { SupplierService } from '../../suppliers/supplier.service';
         @if (updateInventoryItemForm.controls['name'].touched &&
         updateInventoryItemForm.controls['name'].hasError('required')) {
           <div class="alert">Name is required.</div>
+        } @else if (updateInventoryItemForm.controls['name'].value.length < 3 &&
+          updateInventoryItemForm.controls['name'].value.length != 0) {
+          <div class="alert">Name must be 3 characters</div>
+        } @else if (updateInventoryItemForm.controls['name'].value.length > 100) {
+          <div class="alert">Name cannot exceed 100 characters</div>
         }
         <div class="form-group">
           <label for="description">Description:</label>
@@ -58,6 +55,11 @@ import { SupplierService } from '../../suppliers/supplier.service';
         @if (updateInventoryItemForm.controls['description'].touched &&
         updateInventoryItemForm.controls['description'].hasError('required')) {
           <div class="alert">Description is required.</div>
+        } @else if (updateInventoryItemForm.controls['description'].value.length < 3 &&
+          updateInventoryItemForm.controls['description'].value.length != 0) {
+          <div class="alert">Name must be 3 characters</div>
+        } @else if (updateInventoryItemForm.controls['description'].value.length > 500) {
+          <div class="alert">Description cannot exceed 500 characters</div>
         }
         <div class="form-group">
           <label for="quantity">Quantity:</label>
@@ -92,12 +94,14 @@ export class UpdateInventoryItemComponent {
   inventoryItemId: string;
   categoryId!: number; // Variable to store categoryId
   supplierId!: number; // Variable to store categoryId
+  categoryName!: string;
+  supplierName!: string;
 
   updateInventoryItemForm: FormGroup = this.fb.group({
     category: [null, Validators.compose([Validators.required])],
     supplier: [null, Validators.compose([Validators.required])],
-    name: [null, Validators.compose([Validators.required, Validators.minLength(3)])],
-    description: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
+    name: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+    description: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(500)])],
     quantity: [null, Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])],
     price: [null, Validators.compose([Validators.required, Validators.pattern("^[0-9]+.?[0-9]*$")])]
   })
@@ -106,7 +110,6 @@ export class UpdateInventoryItemComponent {
     private inventoryItemService: InventoryItemService, private categoryService: CategoryService,
     private supplierService: SupplierService) {
     this.inventoryItemId = this.route.snapshot.paramMap.get('inventoryItemId') || "";
-    console.log('id', this.inventoryItemId);
     this.inventoryItem = {} as InventoryItem;
     this.errorMessage = '';
 
@@ -132,7 +135,7 @@ export class UpdateInventoryItemComponent {
     this.inventoryItemService.getInventoryItem(this.inventoryItemId).subscribe({
       next: (inventoryItem: InventoryItem) => {
         if (!inventoryItem) {
-          this.router.navigate(['/items']);
+          this.router.navigate(['/inventory-items']);
         }
 
         this.inventoryItem = inventoryItem;
@@ -141,11 +144,28 @@ export class UpdateInventoryItemComponent {
         console.error('Error fetching inventory item details', error);
       },
       complete: () => {
-        const categoryName = this.categoryService.getCategory(this.inventoryItem.categoryId);
-        const supplierName = this.supplierService.getSupplier(this.inventoryItem.supplierId);
+        this.categoryService.getCategory(this.inventoryItem.categoryId).subscribe({
+          next: (data: Category) => {
+            // Set the values obtained
+            this.categoryName = data['categoryName'];
+            this.updateInventoryItemForm.controls['category'].setValue(this.categoryName);
+          },
+          error: (error: any) => {
+            console.error('Error fetching agent performance by supervisor data:', error);
+          }
+        });
 
-        this.updateInventoryItemForm.controls['category'].setValue(categoryName);
-        this.updateInventoryItemForm.controls['supplier'].setValue(supplierName);
+        supplierService.getSupplier(this.inventoryItem.supplierId).subscribe({
+          next: (data: Supplier) => {
+            // Set the values obtained
+            this.supplierName = data['supplierName'];
+            this.updateInventoryItemForm.controls['supplier'].setValue(this.supplierName);
+          },
+          error: (error: any) => {
+            console.error('Error fetching agent performance by supervisor data:', error);
+          }
+        });
+
         this.updateInventoryItemForm.controls['name'].setValue(this.inventoryItem.name);
         this.updateInventoryItemForm.controls['description'].setValue(this.inventoryItem.description);
         this.updateInventoryItemForm.controls['quantity'].setValue(this.inventoryItem.quantity);
@@ -161,6 +181,9 @@ export class UpdateInventoryItemComponent {
     const description = this.updateInventoryItemForm.controls['description'].value;
     const quantity = this.updateInventoryItemForm.controls['quantity'].value;
     const price = this.updateInventoryItemForm.controls['price'].value;
+
+    console.log('category name', categoryName);
+    console.log('supplier name', supplierName);
 
     // Check if the categories array is not empty.
     if (this.categories.length) {
@@ -197,12 +220,12 @@ export class UpdateInventoryItemComponent {
         price: price
       };
 
-      console.log('Creating Inventory Item', updateInventoryItem);
+      console.log('Updating Inventory Item', updateInventoryItem);
 
       this.inventoryItemService.updateInventoryItem(updateInventoryItem, this.inventoryItemId).subscribe({
         next: (result: any) => {
           console.log(`Inventory Item update successfully: ${result.message}`);
-          this.router.navigate(['/']);
+          this.router.navigate(['/inventory-items']);
         },
         error: (error) => {
           console.error('Error updating inventory item', error);

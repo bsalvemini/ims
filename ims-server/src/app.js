@@ -63,7 +63,7 @@ app.use('/api', indexRouter);
 app.use('/api/items', allInventoryItemsRouter);
 app.use('/api/items', updateInventoryItemRouter);
 app.use('/api/create-inventory-item', createInventoryItemRouter);
-app.use('/api/itemById', readInventoryItemByIdRouter);
+app.use('/api/items', readInventoryItemByIdRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/suppliers', suppliersRouter);
 

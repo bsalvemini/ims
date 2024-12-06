@@ -52,24 +52,7 @@ router.get('/', async(req, res, next) => {
  */
 router.get('/:categoryId', async(req, res, next) => {
   try {
-    const categoryId = req.params.categoryId;
-    const category = await Supplier.aggregate([
-      {
-        $match: { categoryId: categoryId }
-      },
-      {
-        $group: {
-          _id: '$categoryId',
-          categoryName: { $first: '$categoryName' }
-        }
-      },
-      {
-        $project: {
-          _id: 0,
-          categoryName: '$categoryName'
-        }
-      }
-    ]);
+    const category = await Category.findOne({categoryId: req.params.categoryId});
     res.send(category);
   } catch (err) {
     console.error('Error getting category', err);

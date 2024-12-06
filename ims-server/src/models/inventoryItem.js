@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 let inventoryItemSchema = new Schema({
   categoryId: {
     type: Number,
-    required: true,
+    required: [true, 'Category ID is required'] 
   },
   supplierId: {
     type: Number,
-    required: true,
+    required: [true, 'Supplier ID is required'] 
   },
   name: {
     type: String,
@@ -20,17 +20,19 @@ let inventoryItemSchema = new Schema({
   },
   description: {
     type: String,
+    minlength: [3, "Description must be 3 characters"],
     maxlength: [500, "Description cannot exceed 500 characters"],
     required: true,
   },
   quantity: {
     type: Number,
-    required: true,
-    min: 0,
+    required: [true, 'Quantity is required'],
+    min: [0, 'Quantity must be a non-negative number'],
   },
   price: {
     type: Number,
-    required: true,
+    required: [true, 'Price is required'],
+    min: [0.0, 'Price must be a non-negative number'],
   },
   dateCreated: {
     type: Date,
@@ -40,6 +42,13 @@ let inventoryItemSchema = new Schema({
     type: Date,
   },
 });
+
+inventoryItemSchema.pre('save', function(next) { 
+  if (!this.isNew) {
+    this.dateModified = new Date(); 
+  }
+  next(); 
+})
 
 module.exports = {
   InventoryItem: mongoose.model("InventoryItem", inventoryItemSchema)

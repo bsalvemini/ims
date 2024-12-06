@@ -18,9 +18,9 @@ const { ObjectId } = require('mongodb');
 const ajv = new Ajv();
 const validateUpdateInventoryItem = ajv.compile(updateInventoryItemSchema);
 
-router.patch('/:inventoryItemId', async (req, res, next) => {
+router.patch('/:itemId', async (req, res, next) => {
   try {
-    const inventoryItemId = ObjectId.createFromHexString(req.params.inventoryItemId);
+    const inventoryItemId = ObjectId.createFromHexString(req.params.itemId);
     const inventoryItem = await InventoryItem.findOne({ _id: inventoryItemId });
     const valid = validateUpdateInventoryItem(req.body);
 
@@ -42,7 +42,7 @@ router.patch('/:inventoryItemId', async (req, res, next) => {
 
     res.send({
       message: 'Inventory item updated successfully',
-      name: inventoryItem.name
+      id: inventoryItem._id
     });
   } catch (err) {
     console.error(`Error while updating inventory item: ${err}`);
