@@ -3,11 +3,12 @@ import { InventoryItem } from '../inventory-item';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-list-all-inventory-items',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <div class="all-items-page">
       <h1 class="all-items-page__title">All Items</h1>
@@ -23,6 +24,7 @@ import { environment } from '../../../environments/environment';
               <th class="all-items-page__table-header">Description</th>
               <th class="all-items-page__table-header">Quantity</th>
               <th class="all-items-page__table-header">Price</th>
+              <th class="all-items-page__table-header">Functions</th>
             </tr>
           </thead>
           <tbody class="all-items-page__table-body">
@@ -35,6 +37,12 @@ import { environment } from '../../../environments/environment';
                 <td class="all-items-page__table-cell">{{ inventoryItem.description }}</td>
                 <td class="all-items-page__table-cell">{{ inventoryItem.quantity }}</td>
                 <td class="all-items-page__table-cell">{{ inventoryItem.price | currency: 'USD' }}</td>
+                <td class="all-items-page__table-cell all-items-page__table-cell--functions">
+                  <a routerLink="/inventory-items/{{ inventoryItem._id }}"
+                  class="all-items-page__icon-link"><i class="fas fa-edit"></i></a>
+                  <a (click)="deleteInventoryItem(inventoryItem._id)" class="all-items-page__icon-link">
+                    <i class="fas fa-trash-alt"></i></a>
+                </td>
               </tr>
             }
           </tbody>
@@ -82,6 +90,15 @@ import { environment } from '../../../environments/environment';
       text-align: center;
       color: #6c757d;
     }
+
+    .all-items-page__icon-link {
+      cursor: pointer;
+      color: #6c757d;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+
   `
 })
 export class ListAllInventoryItemsComponent {
@@ -94,4 +111,6 @@ export class ListAllInventoryItemsComponent {
       }
     })
   }
+
+  deleteInventoryItem(inventoryItemId: string) {}
 }
