@@ -21,7 +21,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         <div class="menu-sub-link" *ngIf="this.invItemLinksVisible">
           <a routerLink="/create-inventory-item">Create Inventory Item</a>
           <a href="">List Item By ID</a>
-          <a href="">Update Inventory Item</a>
+          <a routerLink="/inventory-items/update">Update Inventory Item</a>
           <a href="">Delete Inventory Item</a>
           <a routerLink="/inventory-items">List All Inventory Items</a>
         </div>

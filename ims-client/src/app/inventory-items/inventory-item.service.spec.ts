@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from
 '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
 import { InventoryItemService } from './inventory-item.service';
-import { AddInventoryItemDTO, InventoryItem } from '../suppliers/inventory-item';
+import { AddInventoryItemDTO, InventoryItem } from './inventory-item';
 
 describe('InventoryItemService', () => {
   let service: InventoryItemService;
@@ -30,13 +30,29 @@ describe('InventoryItemService', () => {
       name: 'MacBook Air 13.6 Laptop',
       description: 'M2 chip Built for Apple Intelligence - 8GB Memory - 256GB SSD - Midnight',
       quantity: 13,
-      price: 749.99,
-      dateCreated: "2021-01-01T00:00:00.000Z"
+      price: 749.99
     };
     const newInventoryItem: InventoryItem = {
       _id: '650c1f1e1c9d440000d1e1f1',
       categoryId: 1000,
       supplierId: 1,
+      categoryDetails: {
+        _id: '650c1f1e1c9d440000a1b1c1',
+        categoryId: 1000,
+        categoryName: 'Electronics',
+        description: 'Electronic devices and gadgets',
+        dateCreated: '2021-01-01T00:00:00.000Z',
+        dateModified: '2021-01-01T00:00:00.000Z',
+      },
+      supplerDetails: {
+        _id: '650c1f1e1c9d440000a1b1c1',
+        supplierId: 1,
+        supplierName: 'TechSupplier',
+        contactInformation: '123-456-7890',
+        address: '123 Tech Street',
+        dateCreated: '2021-01-01T00:00:00.000Z',
+        dateModified: '2021-01-01T00:00:00.000Z',
+      },
       name: 'MacBook Air 13.6 Laptop',
       description: 'M2 chip Built for Apple Intelligence - 8GB Memory - 256GB SSD - Midnight',
       quantity: 13,

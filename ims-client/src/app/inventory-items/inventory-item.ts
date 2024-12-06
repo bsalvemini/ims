@@ -31,4 +31,6 @@ export interface SupplerDetails {
   dateModified: string
 }
 
-export type AddInventoryItemDTO = Omit<InventoryItem, '_id' | 'dateModified' | 'categoryDetails' | 'supplerDetails'>;
+export type AddInventoryItemDTO = Omit<InventoryItem, '_id' | 'dateCreated' | 'dateModified' | 'categoryDetails' | 'supplerDetails'>;
+
+export type UpdateInventoryItemDTO = Omit<InventoryItem, '_id' | 'dateCreated' | 'dateModified' | 'categoryDetails' | 'supplerDetails'>

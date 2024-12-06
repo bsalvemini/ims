@@ -38,4 +38,43 @@ router.get('/', async(req, res, next) => {
   }
 });
 
+/**
+ * @description
+ *
+ * GET /:supplierId
+ *
+ * Fetch a supplier name.
+ *
+ * Example:
+ * fetch('/suppliers/:supplierId')
+ *  .then(response => response.json())
+ *  .then(data => console.log(data));
+ */
+router.get('/:supplierId', async(req, res, next) => {
+  try {
+    const supplierId = req.params.supplierId;
+    const supplier = await Supplier.aggregate([
+      {
+        $match: { supplierId: supplierId }
+      },
+      {
+        $group: {
+          _id: '$supplierId',
+          supplierName: { $first: '$supplierName' }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          supplierName: '$supplierName'
+        }
+      }
+    ]);
+    res.send(supplier);
+  } catch (err) {
+    console.error('Error getting supplier', err);
+    next(err);
+  }
+});
+
 module.exports = router;
