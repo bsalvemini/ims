@@ -16,8 +16,7 @@ describe('CreateInventoryItem API', () => {
       name: 'MacBook Air 13.6 Laptop',
       description: 'M2 chip Built for Apple Intelligence - 8GB Memory - 256GB SSD - Midnight',
       quantity: 13,
-      price: 749.99,
-      dateCreated: "2021-01-01T00:00:00.000Z"
+      price: 749.99
     });
 
     expect(response.status).toBe(200);
@@ -32,8 +31,7 @@ describe('CreateInventoryItem API', () => {
       name: 'Ma',  // Invalid: too short
       description: 'M2 chip Built for Apple Intelligence - 8GB Memory - 256GB SSD - Midnight',
       quantity: 13,
-      price: 749.99,
-      dateCreated: "invalid-date" // Invalid: not a date
+      price: 749.99
     });
 
     expect(response.status).toBe(400);

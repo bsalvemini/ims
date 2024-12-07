@@ -20,8 +20,7 @@ describe('UpdateInventoryItem API', () => {
       name: "XPS 13 Laptop",
       description: "Snapdragon® X Elite, X1E-80-100 (12 cores up to 3.4 GHz Dual-Core Boost up to 4 GHz, NPU integrated)",
       quantity: 10,
-      price: 999.99,
-      dateModified: "2021-01-01T00:00:00.000Z"
+      price: 999.99
     });
 
     expect(response.status).toBe(200);
@@ -36,8 +35,7 @@ describe('UpdateInventoryItem API', () => {
       name: "XP", // Invalid: too short
       description: "", // Invalid: empty
       quantity: 10,
-      price: 999.99,
-      dateModified: "2021-01-01T00:00:00.000Z"
+      price: 999.99
     });
       
     expect(response.status).toBe(400);

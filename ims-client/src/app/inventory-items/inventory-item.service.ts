@@ -18,6 +18,10 @@ export class InventoryItemService {
   }
 
   getInventoryItem(inventoryItemId: string) {
-    return this.http.get<InventoryItem>(`${environment.apiBaseUrl}/api/items/${inventoryItemId}`);
+    return this.http.get<InventoryItem>(`${environment.apiBaseUrl}/api/itemById/${inventoryItemId}`);
+  }
+
+  getInventoryItems() {
+    return this.http.get<InventoryItem[]>(`${environment.apiBaseUrl}/api/items`);
   }
 }

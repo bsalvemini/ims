@@ -6,8 +6,8 @@ export interface InventoryItem {
   description: string,
   quantity: number,
   price: number,
-  dateCreated: string,
-  dateModified: string
+  dateCreated?: string,
+  dateModified?: string
 }
 
 export interface InventoryItemWithDetails {

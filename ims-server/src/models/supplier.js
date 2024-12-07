@@ -2,16 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define the supplier schema
-let SupplierSchema = new Schema({
+let supplierSchema = new Schema({
   supplierId: {
     type: Number,
     required: true,
+    unique: true
   },
   supplierName: {
     type: String,
     unique: true,
     required: [true, "Supplier name is required"],
-    minlength: [3, "Supplier name must be 3 characters"],
+    minlength: [3, "Supplier name must be at least 3 characters"],
     maxlength: [100, "Supplier name cannot exceed 100 characters"],
   },
   contactInformation: {
@@ -32,6 +33,13 @@ let SupplierSchema = new Schema({
   },
 });
 
+// Custom validator 
+supplierSchema.path('supplierName').validate(function(val) {
+  return /^[A-Za-z\s]+$/.test(val); // Only allows letters and spaces 
+}, 'Supplier name can only contain letters and spaces');
+
+const Supplier = mongoose.model("Supplier", supplierSchema);
+
 module.exports = {
-  Supplier: mongoose.model("Supplier", SupplierSchema)
+  Supplier
 };

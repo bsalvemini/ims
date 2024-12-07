@@ -11,7 +11,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories() {
-    return this.http.get<Category>(`${environment.apiBaseUrl}/api/categories`);
+    return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`);
   }
 
   getCategory(categoryId: number) {

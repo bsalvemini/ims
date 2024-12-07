@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { InventoryItemService } from '../inventory-item.service';
 import { Router, RouterLink } from '@angular/router';
 import { Category } from '../../categories/category';
 import { Supplier } from '../../suppliers/supplier';
 import { AddInventoryItemDTO } from '../inventory-item';
+import { CategoryService } from '../../categories/category.service';
+import { SupplierService } from '../../suppliers/supplier.service';
 
 @Component({
   selector: 'app-create-inventory-item',
@@ -89,24 +89,25 @@ export class CreateInventoryItemComponent {
   suppliers: Supplier[] = [];
   errorMessage: string;
   categoryId!: number; // Variable to store categoryId
-  supplierId!: number; // Variable to store categoryId
+  supplierId!: number; // Variable to store supplierId
 
   createInventoryItemForm: FormGroup = this.fb.group({
     category: [null, Validators.compose([Validators.required])],
     supplier: [null, Validators.compose([Validators.required])],
-    name: [null, Validators.compose([Validators.required, Validators.minLength(3)])],
-    description: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
+    name: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+    description: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(500)])],
     quantity: [null, Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])],
     price: [null, Validators.compose([Validators.required, Validators.pattern("^[0-9]+.?[0-9]*$")])]
-  })
+  });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router,
-    private inventoryItemService: InventoryItemService) {
+  constructor(private fb: FormBuilder, private router: Router, private inventoryItemService: InventoryItemService,
+    private categoryService: CategoryService, private supplierService: SupplierService) {
     this.errorMessage = '';
 
     // Query to get the categories
-    this.http.get(`${environment.apiBaseUrl}/api/categories`).subscribe({
+    this.categoryService.getCategories().subscribe({
       next: (data: any) => {
+        console.log('categories', data);
         this.categories = data;
       },
       error: (err) => {
@@ -114,8 +115,9 @@ export class CreateInventoryItemComponent {
       }
     });
     // Query to get the suppliers
-    this.http.get(`${environment.apiBaseUrl}/api/suppliers`).subscribe({
+    this.supplierService.getSuppliers().subscribe({
       next: (data: any) => {
+        console.log('suppliers', data);
         this.suppliers = data;
       },
       error: (err) => {
@@ -154,7 +156,18 @@ export class CreateInventoryItemComponent {
 
     // Check if the createInventoryItemForm is invalid.
     if (!this.createInventoryItemForm.valid) {
-      this.errorMessage = "Please fill in all fields.";
+      if (name?.length < 3 && name?.length != 0) {
+        this.errorMessage = "Name must be at least 3 characters.";
+      } else if (name?.length > 100) {
+        this.errorMessage = "Name cannot exceed 100 characters.";
+      } else if (description?.length < 3 && description?.length != 0) {
+        this.errorMessage = "Description must be at least 3 characters.";
+      } else if (description?.length > 500) {
+        this.errorMessage = "Description cannot exceed 500 characters.";
+      } else {
+        this.errorMessage = "Please fill in all fields.";
+      }
+
       alert(this.errorMessage);
       return;
     } else {
