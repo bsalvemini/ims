@@ -76,7 +76,7 @@ describe('InventoryItemService', () => {
       expect(inventoryItem).toEqual(dummyInventoryItem);
     });
 
-    const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/items/674752ac6db561ba71c1ab86`);
+    const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/itemById/674752ac6db561ba71c1ab86`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyInventoryItem);
   });
