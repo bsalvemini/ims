@@ -1,15 +1,27 @@
 export interface InventoryItem {
-  "_id": string,
-  "categoryId": number,
-  "supplierId": number,
-  "categoryDetails": CategoryDetails,
-  "supplerDetails": SupplerDetails,
-  "name": string,
-  "description": string,
-  "quantity": number,
-  "price": number,
-  "dateCreated": string,
-  "dateModified": string
+  _id: string,
+  categoryId: number,
+  supplierId: number,
+  name: string,
+  description: string,
+  quantity: number,
+  price: number,
+  dateCreated: string,
+  dateModified: string
+}
+
+export interface InventoryItemWithDetails {
+  _id: string,
+  categoryId: number,
+  supplierId: number,
+  categoryDetails: CategoryDetails,
+  supplerDetails: SupplerDetails,
+  name: string,
+  description: string,
+  quantity: number,
+  price: number,
+  dateCreated: string,
+  dateModified: string
 }
 
 export interface CategoryDetails {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InventoryItem } from '../inventory-item';
+import { InventoryItemWithDetails } from '../inventory-item';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -30,7 +30,7 @@ import { RouterLink } from '@angular/router';
           <tbody class="all-items-page__table-body">
             @for (inventoryItem of inventoryItems; track inventoryItem) {
               <tr class="all-items-page__table-row">
-                <td class="all-items-page__table-cell">{{ inventoryItem._id }}</td>
+                <td class="all-items-page__table-cell"><a routerLink="/read-inventory-item/{{ inventoryItem._id }}">{{ inventoryItem._id }}</a></td>
                 <td class="all-items-page__table-cell">{{ inventoryItem.categoryDetails.categoryName }}</td>
                 <td class="all-items-page__table-cell">{{ inventoryItem.supplerDetails.supplierName }}</td>
                 <td class="all-items-page__table-cell">{{ inventoryItem.name }}</td>
@@ -102,7 +102,7 @@ import { RouterLink } from '@angular/router';
   `
 })
 export class ListAllInventoryItemsComponent {
-  inventoryItems: InventoryItem[] = [];
+  inventoryItems: InventoryItemWithDetails[] = [];
 
   constructor(private http: HttpClient) {
     this.http.get(`${environment.apiBaseUrl}/api/items`).subscribe({

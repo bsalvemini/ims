@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListAllInventoryItemsComponent } from './list-all-inventory-items.component';
 import { By } from '@angular/platform-browser';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ListAllInventoryItemsComponent', () => {
   let component: ListAllInventoryItemsComponent;
@@ -10,7 +11,7 @@ describe('ListAllInventoryItemsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ListAllInventoryItemsComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule, ListAllInventoryItemsComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListAllInventoryItemsComponent);

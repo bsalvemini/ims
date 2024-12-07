@@ -70,7 +70,7 @@ select, #price, #quantity, #dateCreated {
   float: right;
 }
 
-input[type="submit"], .cancelButton {
+input[type="submit"], .cancelButton, .deleteButton {
   width: 200px;
   margin-top: 50px;
   color: white;
@@ -88,6 +88,11 @@ input[type="submit"] {
 .cancelButton {
   margin-left: 10px;
   background-color: #989898;
+}
+
+.deleteButton {
+  margin-left: 10px;
+  background-color: #f96062;
 }
 
 .alert {
