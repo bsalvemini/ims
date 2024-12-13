@@ -1,3 +1,10 @@
+/**
+ * Author: Brandon Salvemini
+ * Date: 12/12/2024
+ * File: delete-inventory-item.component.ts
+ * Description: Component file for the delete inventory item component
+ */
+
 import { CommonModule, formatNumber } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -10,14 +17,14 @@ import { Supplier } from '../../suppliers/supplier';
 import { InventoryItemService } from '../inventory-item.service';
 
 @Component({
-  selector: 'app-read-inventory-item-by-id',
+  selector: 'app-delete-inventory-item',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   template: `
-    <div class="form-container">
-      <h1>Read inventory item</h1>
+  <div class="form-container">
+      <h1>Delete inventory item</h1>
 
-      <form [formGroup]="readInventoryItemForm">
+      <form [formGroup]="deleteInventoryItemForm">
       <div class="form-group">
         <label for="id">ID:</label>
         <input type="text" name="id" id="id" formControlName="id" readonly />
@@ -48,26 +55,20 @@ import { InventoryItemService } from '../inventory-item.service';
             <input type="text" name="price" id="price" formControlName="price" readonly />
           </div>
           <div class="form-actions">
-            <input type="submit" value="Update Item" id="updateItemBtn" (click)="updateItem()">
             <input type="button" value="Delete Item" class="deleteButton" (click)="deleteItem()">
-            <input type="button" value="Back" class="cancelButton" routerLink="/inventory-items">
+            <input type="button" value="Cancel" class="cancelButton" routerLink="/inventory-items">
           </div>
       </form>
     </div>
   `,
-  styles: `
-    input#id {
-      margin-left: 4px;
-      width: calc(100% - 100px);
-    }
-  `,
+  styles: ``
 })
-export class ReadInventoryItemByIdComponent {
+export class DeleteInventoryItemComponent {
   inventoryItem: InventoryItem;
 
   inventoryItemId: string;
 
-  readInventoryItemForm: FormGroup = this.fb.group({
+  deleteInventoryItemForm: FormGroup = this.fb.group({
     id: [null],
     supplier: [null],
     category: [null],
@@ -91,11 +92,11 @@ export class ReadInventoryItemByIdComponent {
 
           // Set id, name, description, quantity, and price
           // Supplier and category are set below
-          this.readInventoryItemForm.controls['id'].setValue(this.inventoryItem._id);
-          this.readInventoryItemForm.controls['name'].setValue(this.inventoryItem.name);
-          this.readInventoryItemForm.controls['description'].setValue(this.inventoryItem.description);
-          this.readInventoryItemForm.controls['quantity'].setValue(this.inventoryItem.quantity);
-          this.readInventoryItemForm.controls['price'].setValue(formatNumber(this.inventoryItem.price, 'en-US'));
+          this.deleteInventoryItemForm.controls['id'].setValue(this.inventoryItem._id);
+          this.deleteInventoryItemForm.controls['name'].setValue(this.inventoryItem.name);
+          this.deleteInventoryItemForm.controls['description'].setValue(this.inventoryItem.description);
+          this.deleteInventoryItemForm.controls['quantity'].setValue(this.inventoryItem.quantity);
+          this.deleteInventoryItemForm.controls['price'].setValue(formatNumber(this.inventoryItem.price, 'en-US'));
         },
         error: (err) => {
           console.error('Error fetching details for inventory item:', err);
@@ -104,25 +105,33 @@ export class ReadInventoryItemByIdComponent {
           // Get the supplier name
           this.supplierService.getSupplier(this.inventoryItem.supplierId).subscribe({
             next: (data: Supplier) => {
-              this.readInventoryItemForm.controls['supplier'].setValue(data['supplierName']);
+              this.deleteInventoryItemForm.controls['supplier'].setValue(data['supplierName']);
             }
           });
 
           // Get the category name
           this.categoryService.getCategory(this.inventoryItem.categoryId).subscribe({
             next: (data: Category) => {
-              this.readInventoryItemForm.controls['category'].setValue(data['categoryName']);
+              this.deleteInventoryItemForm.controls['category'].setValue(data['categoryName']);
             }
           });
         }
       });
     }
 
-  updateItem() {
-    this.router.navigate([`/inventory-items/${this.inventoryItem._id}`])
-  }
+    deleteItem() {
+      if (!confirm('Are you sure you want to delete this item?')) {
+        return;
+      }
 
-  deleteItem() {
-    this.router.navigate([`/delete-inventory-item/${this.inventoryItem._id}`])
-  }
+      this.inventoryItemService.deleteInventoryItem(this.inventoryItemId).subscribe({
+        next: () => {
+          console.log(`Item with ID ${this.inventoryItemId} deleted successfully`);
+          this.router.navigate(['/inventory-items']);
+        }, error: (err: any) => {
+          console.error('Error deleting inventory item:', err);
+        }
+      })
+    }
+
 }

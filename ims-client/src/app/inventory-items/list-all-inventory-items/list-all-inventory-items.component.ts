@@ -40,7 +40,7 @@ import { RouterLink } from '@angular/router';
                 <td class="all-items-page__table-cell all-items-page__table-cell--functions">
                   <a routerLink="/inventory-items/{{ inventoryItem._id }}"
                   class="all-items-page__icon-link"><i class="fas fa-edit"></i></a>
-                  <a (click)="deleteInventoryItem(inventoryItem._id)" class="all-items-page__icon-link">
+                  <a routerLink="/delete-inventory-item/{{ inventoryItem._id }}" class="all-items-page__icon-link">
                     <i class="fas fa-trash-alt"></i></a>
                 </td>
               </tr>
@@ -111,6 +111,4 @@ export class ListAllInventoryItemsComponent {
       }
     })
   }
-
-  deleteInventoryItem(inventoryItemId: string) {}
 }

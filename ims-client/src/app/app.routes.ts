@@ -4,6 +4,7 @@ import { CreateInventoryItemComponent } from './inventory-items/create-inventory
 import { ListAllInventoryItemsComponent } from './inventory-items/list-all-inventory-items/list-all-inventory-items.component';
 import { UpdateInventoryItemComponent } from './inventory-items/update-inventory-item/update-inventory-item.component';
 import { ReadInventoryItemByIdComponent } from './inventory-items/read-inventory-item-by-id/read-inventory-item-by-id.component';
+import { DeleteInventoryItemComponent } from './inventory-items/delete-inventory-item/delete-inventory-item.component';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'read-inventory-item/:inventoryItemId',
     component: ReadInventoryItemByIdComponent
+  },
+  {
+    path: 'delete-inventory-item/:inventoryItemId',
+    component: DeleteInventoryItemComponent
   }
 ];

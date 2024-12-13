@@ -18,6 +18,7 @@ const allInventoryItemsRouter = require('./routes/inventoryItem/allInventoryItem
 const createInventoryItemRouter = require('./routes/inventoryItem/createInventoryItem');
 const updateInventoryItemRouter = require('./routes/inventoryItem/updateInventoryItems');
 const readInventoryItemByIdRouter = require('./routes/inventoryItem/readInventoryItemById');
+const deleteItemRouter = require('./routes/inventoryItem/deleteInventoryItem');
 const categoriesRouter = require('./routes/categories/index');
 const suppliersRouter = require('./routes/suppliers/index');
 
@@ -64,6 +65,7 @@ app.use('/api/items', allInventoryItemsRouter);
 app.use('/api/items', updateInventoryItemRouter);
 app.use('/api/create-inventory-item', createInventoryItemRouter);
 app.use('/api/itemById', readInventoryItemByIdRouter);
+app.use('/api/deleteItem', deleteItemRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/suppliers', suppliersRouter);
 

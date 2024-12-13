@@ -24,4 +24,9 @@ export class InventoryItemService {
   getInventoryItems() {
     return this.http.get<InventoryItem[]>(`${environment.apiBaseUrl}/api/items`);
   }
+
+  deleteInventoryItem(inventoryItemId: string) {
+    return this.http.delete(`${environment.apiBaseUrl}/api/deleteItem/${inventoryItemId}`);
+  }
+
 }
