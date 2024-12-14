@@ -10,7 +10,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <div class="app-container">
       <header class="header-content">
         <div class="header-title">{{ title }}</div>
-        <input type="text" placeholder="Search inventory item.." class="search-inventory-item">
       </header>
       <nav class="side-menu">
         <a class="menu-link" routerLink="/">Home</a>
@@ -84,17 +83,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         "SCAN" 0,
         "XELA" 0,
         "YELA" 0;
-    }
-
-    .search-inventory-item {
-      background: url(/assets/search-symbol.png) no-repeat scroll;
-      background-size: 14px;
-      background-position-y: center;
-      background-position-x: 3px;
-      padding: 6px 22px;
-      margin-left: 250px;
-      border: 1px solid rgba(33, 35, 38, 0.1);
-      border-radius: 5px;
     }
 
     .side-menu {

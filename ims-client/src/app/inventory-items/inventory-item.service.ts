@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { AddInventoryItemDTO, InventoryItem, UpdateInventoryItemDTO } from './inventory-item';
+import { AddInventoryItemDTO, InventoryItem, InventoryItemWithDetails, UpdateInventoryItemDTO } from './inventory-item';
 
 @Injectable({
 providedIn: 'root'
@@ -22,11 +22,15 @@ export class InventoryItemService {
   }
 
   getInventoryItems() {
-    return this.http.get<InventoryItem[]>(`${environment.apiBaseUrl}/api/items`);
+    return this.http.get<InventoryItemWithDetails[]>(`${environment.apiBaseUrl}/api/items`);
   }
 
   deleteInventoryItem(inventoryItemId: string) {
     return this.http.delete(`${environment.apiBaseUrl}/api/deleteItem/${inventoryItemId}`);
+  }
+
+  searchInventoryItems(name: string) {
+    return this.http.get<InventoryItemWithDetails[]>(`${environment.apiBaseUrl}/api/searchItems?name=${name}`);
   }
 
 }

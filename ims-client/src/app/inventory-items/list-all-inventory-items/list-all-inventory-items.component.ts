@@ -13,6 +13,8 @@ import { RouterLink } from '@angular/router';
     <div class="all-items-page">
       <h1 class="all-items-page__title">All Items</h1>
 
+      <button class="all-items-page__button" routerLink="/search-inventory-items">Search inventory item</button>
+
       @if (inventoryItems && inventoryItems.length > 0) {
         <table class="all-items-page__table">
           <thead class="all-items-page__table-head">
@@ -69,7 +71,7 @@ import { RouterLink } from '@angular/router';
     }
 
     .all-items-page__table-header {
-      background-color: #ffe484;
+      background-color: #B2742D;
       color: #000;
       border: 1px solid black;
       padding: 5px;
@@ -98,7 +100,18 @@ import { RouterLink } from '@angular/router';
       margin: 0 5px;
     }
 
-
+    .all-items-page__button {
+      background-color: #B2742D;
+      float: right;
+      width: 200px;
+      margin-bottom: 20px;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+    }
   `
 })
 export class ListAllInventoryItemsComponent {

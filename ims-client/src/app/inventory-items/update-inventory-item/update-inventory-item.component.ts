@@ -139,7 +139,7 @@ export class UpdateInventoryItemComponent {
             this.updateInventoryItemForm.controls['category'].setValue(categoryName);
           },
           error: (error: any) => {
-            console.error('Error fetching agent performance by supervisor data:', error);
+            console.error('Error fetching category name:', error);
           }
         });
 
@@ -150,7 +150,7 @@ export class UpdateInventoryItemComponent {
             this.updateInventoryItemForm.controls['supplier'].setValue(supplierName);
           },
           error: (error: any) => {
-            console.error('Error fetching agent performance by supervisor data:', error);
+            console.error('Error fetching supplier name:', error);
           }
         });
 

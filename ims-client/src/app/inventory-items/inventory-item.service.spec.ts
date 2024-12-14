@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from
 '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
 import { InventoryItemService } from './inventory-item.service';
-import { AddInventoryItemDTO, InventoryItem, UpdateInventoryItemDTO } from './inventory-item';
+import { AddInventoryItemDTO, InventoryItem, InventoryItemWithDetails, UpdateInventoryItemDTO } from './inventory-item';
 
 describe('InventoryItemService', () => {
   let service: InventoryItemService;
@@ -24,7 +24,7 @@ describe('InventoryItemService', () => {
   });
 
   it('should retrieve all inventory items', () => {
-    const dummyInventoryItems: InventoryItem[] = [
+    const dummyInventoryItems: InventoryItemWithDetails[] = [
       {
         _id: '674752ac6db561ba71c1ab86',
         categoryId: 1000,
@@ -35,6 +35,23 @@ describe('InventoryItemService', () => {
         price: 699.99,
         dateCreated: '2021-01-01T00:00:00.000Z',
         dateModified: '2021-01-30T09:45:13.000Z',
+        categoryDetails: {
+          _id: '650c1f1e1c9d440000a1b1c1',
+          categoryId: 1000,
+          categoryName: 'Electronics',
+          description: 'Electronic devices and gadgets',
+          dateCreated: '2021-01-01T00:00:00.000Z',
+          dateModified: '2021-01-01T00:00:00.000Z',
+        },
+        supplerDetails: {
+          _id: '650c1f1e1c9d440000a1b1c1',
+          supplierId: 1,
+          supplierName: 'TechSupplier',
+          contactInformation: '123-456-7890',
+          address: '123 Tech Street',
+          dateCreated: '2021-01-01T00:00:00.000Z',
+          dateModified: '2021-01-01T00:00:00.000Z',
+        },
       },
       {
         _id: '674753586db561ba71c1ab95',
@@ -45,7 +62,24 @@ describe('InventoryItemService', () => {
         quantity: 10,
         price: 1500,
         dateCreated: '2021-01-01T00:00:00.000Z',
-        dateModified: '2021-01-01T00:00:00.000Z'
+        dateModified: '2021-01-01T00:00:00.000Z',
+        categoryDetails: {
+          _id: '650c1f1e1c9d440000a1b1c1',
+          categoryId: 1000,
+          categoryName: 'Electronics',
+          description: 'Electronic devices and gadgets',
+          dateCreated: '2021-01-01T00:00:00.000Z',
+          dateModified: '2021-01-01T00:00:00.000Z',
+        },
+        supplerDetails: {
+          _id: '650c1f1e1c9d440000a1b1c1',
+          supplierId: 1,
+          supplierName: 'TechSupplier',
+          contactInformation: '123-456-7890',
+          address: '123 Tech Street',
+          dateCreated: '2021-01-01T00:00:00.000Z',
+          dateModified: '2021-01-01T00:00:00.000Z',
+        },
       },
     ];
 

@@ -52,8 +52,8 @@ describe('UpdateInventoryItemComponent', () => {
     expect(component.updateInventoryItemForm.valid).toBeTrue();
   });
 
-  // Unit test 2: should call updateGarden and navigate on successful form submission
-  it('should call updateGarden and navigate on successful form submission', fakeAsync(() => {
+  // Unit test 2: should call updateInventoryItem and navigate on successful form submission
+  it('should call updateInventoryItem and navigate on successful form submission', fakeAsync(() => {
     const updateInventoryItemDTO: UpdateInventoryItemDTO = {
       categoryId: 1000,
       supplierId: 1,
