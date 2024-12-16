@@ -27,7 +27,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         </div>
         <div class="menu-sub-link" *ngIf="this.suppLinksVisible">
           <a href="">Create Supplier</a>
-          <a href="">List All Suppliers</a>
+          <a routerLink="/suppliers">List All Suppliers</a>
         </div>
       </nav>
       <main class="main-container">

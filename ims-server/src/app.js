@@ -22,6 +22,7 @@ const deleteItemRouter = require('./routes/inventoryItem/deleteInventoryItem');
 const searchInventoryItemsRouter = require('./routes/inventoryItem/searchInventoryItems');
 const categoriesRouter = require('./routes/categories/index');
 const suppliersRouter = require('./routes/suppliers/index');
+const allSuppliersRouter = require('./routes/suppliers/allSuppliers');
 
 // Variable declaration for the express app
 let app = express();
@@ -69,6 +70,7 @@ app.use('/api/itemById', readInventoryItemByIdRouter);
 app.use('/api/deleteItem', deleteItemRouter);
 app.use('/api/searchItems', searchInventoryItemsRouter);
 app.use('/api/categories', categoriesRouter);
+app.use('/api/suppliers/all', allSuppliersRouter);
 app.use('/api/suppliers', suppliersRouter);
 
 // Use the error handling middleware

@@ -10,6 +10,10 @@ export class SupplierService {
 
   constructor(private http: HttpClient) { }
 
+  getAllSuppliers() {
+    return this.http.get<Supplier[]>(`${environment.apiBaseUrl}/api/suppliers/all`);
+  }
+
   getSuppliers() {
     return this.http.get<Supplier[]>(`${environment.apiBaseUrl}/api/suppliers`);
   }
