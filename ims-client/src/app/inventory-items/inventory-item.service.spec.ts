@@ -133,7 +133,7 @@ describe('InventoryItemService', () => {
       expect(inventoryItem).toEqual(mockResponse);
     });
 
-    const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/create-inventory-item`);
+    const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/createInventoryItem`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(newInventoryItem)
     req.flush(mockResponse);

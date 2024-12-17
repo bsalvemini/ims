@@ -66,7 +66,7 @@ app.use(cookieParser());
 app.use('/api', indexRouter);
 app.use('/api/items', allInventoryItemsRouter);
 app.use('/api/items', updateInventoryItemRouter);
-app.use('/api/create-inventory-item', createInventoryItemRouter);
+app.use('/api/createInventoryItem', createInventoryItemRouter);
 app.use('/api/itemById', readInventoryItemByIdRouter);
 app.use('/api/deleteItem', deleteItemRouter);
 app.use('/api/searchItems', searchInventoryItemsRouter);

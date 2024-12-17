@@ -10,7 +10,7 @@ export class InventoryItemService {
   constructor(private http: HttpClient) { }
 
   addInventoryItem(inventoryItem: AddInventoryItemDTO) {
-    return this.http.post<InventoryItem>(`${environment.apiBaseUrl}/api/create-inventory-item`, inventoryItem);
+    return this.http.post<InventoryItem>(`${environment.apiBaseUrl}/api/createInventoryItem`, inventoryItem);
   }
 
   updateInventoryItem(inventoryItem: UpdateInventoryItemDTO, inventoryItemId: string) {

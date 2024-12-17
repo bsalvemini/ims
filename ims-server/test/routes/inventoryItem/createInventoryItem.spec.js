@@ -10,7 +10,7 @@ describe('CreateInventoryItem API', () => {
   it('should create an inventory item successfully', async () => {
     InventoryItem.prototype.save.mockResolvedValue({ _id: '507f1f77bcf86cd799439011' }); // Mock the save method
     
-    const response = await request(app).post('/api/create-inventory-item').send({
+    const response = await request(app).post('/api/createInventoryItem').send({
       categoryId: 1000,
       supplierId: 1,
       name: 'MacBook Air 13.6 Laptop',
@@ -25,7 +25,7 @@ describe('CreateInventoryItem API', () => {
 
   // Unit test 2: should return validation errors for invalid data.
   it('should return validation errors for invalid data', async () => {
-    const response = await request(app).post('/api/create-inventory-item').send({
+    const response = await request(app).post('/api/createInventoryItem').send({
       categoryId: 1000,
       supplierId: 1,
       name: 'Ma',  // Invalid: too short

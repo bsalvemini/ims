@@ -3,7 +3,6 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { SearchInventoryItemsComponent } from './search-inventory-items.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { InventoryItemService } from '../inventory-item.service';
 import { InventoryItemWithDetails } from '../inventory-item';
 import { By } from '@angular/platform-browser';
 

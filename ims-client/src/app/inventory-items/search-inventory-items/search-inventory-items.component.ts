@@ -124,10 +124,7 @@ export class SearchInventoryItemsComponent {
 
   constructor(private inventoryItemService: InventoryItemService) {
     this.txtSearchControl.valueChanges.pipe(debounceTime(500)).subscribe(
-      val => {
-        console.log('searching...', val);
-        this.filterItems(val || '');
-      }
+      val => this.filterItems(val || '')
     );
   }
 
@@ -135,7 +132,6 @@ export class SearchInventoryItemsComponent {
   filterItems(name: string) {
     this.inventoryItemService.searchInventoryItems(name).subscribe({
       next: (inventoryItems: InventoryItemWithDetails[]) => {
-        console.log('Found!!!', this.inventoryItems);
         this.inventoryItems = inventoryItems;
       },
       error: (err: any) => {
