@@ -26,7 +26,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           <img src="assets/up-arrow.png" alt="up arrow" class="arrow" *ngIf="this.suppLinksVisible">
         </div>
         <div class="menu-sub-link" *ngIf="this.suppLinksVisible">
-          <a href="">Create Supplier</a>
+          <a routerLink="/create-supplier">Create Supplier</a>
           <a routerLink="/suppliers">List All Suppliers</a>
         </div>
       </nav>

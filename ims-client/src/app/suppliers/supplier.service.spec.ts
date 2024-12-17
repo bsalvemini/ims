@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SupplierService } from './supplier.service';
-import { Supplier } from './supplier';
+import { CreateSupplierDTO, Supplier } from './supplier';
 import { environment } from '../../environments/environment';
 
 describe('SupplierService', () => {
@@ -76,5 +76,28 @@ describe('SupplierService', () => {
     const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/suppliers/1`);
     expect(req.request.method).toBe('GET');
     req.flush(dummySupplier);
+  });
+
+  it('should create a new supplier', () => {
+    const newSupplier: CreateSupplierDTO = {
+      supplierName: 'Apple',
+      contactInformation: '800-275-2273',
+      address: '10600 N Tantau Ave'
+    };
+
+    const mockResponse: Supplier = {
+      _id: '650c1f1e1c9d440000d1e1f1',
+      supplierId: 7,
+      ...newSupplier
+    };
+
+    service.createSupplier(newSupplier).subscribe(supplier => {
+      expect(supplier).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/createSupplier`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual(newSupplier)
+    req.flush(mockResponse);
   });
 });

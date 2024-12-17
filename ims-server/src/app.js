@@ -23,6 +23,7 @@ const searchInventoryItemsRouter = require('./routes/inventoryItem/searchInvento
 const categoriesRouter = require('./routes/categories/index');
 const suppliersRouter = require('./routes/suppliers/index');
 const allSuppliersRouter = require('./routes/suppliers/allSuppliers');
+const createSupplierRouter = require('./routes/suppliers/createSupplier');
 
 // Variable declaration for the express app
 let app = express();
@@ -72,6 +73,7 @@ app.use('/api/searchItems', searchInventoryItemsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/suppliers/all', allSuppliersRouter);
 app.use('/api/suppliers', suppliersRouter);
+app.use('/api/createSupplier', createSupplierRouter);
 
 // Use the error handling middleware
 app.use(notFoundHandler);

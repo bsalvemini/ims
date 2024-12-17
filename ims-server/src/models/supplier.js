@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Define the counter schema
+let counterSchema = new Schema({ 
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 } 
+});
+
+// Create a counter model
+const Counter = mongoose.model('Counter', counterSchema);
+
 // Define the supplier schema
 let supplierSchema = new Schema({
   supplierId: {
@@ -17,29 +26,40 @@ let supplierSchema = new Schema({
   },
   contactInformation: {
     type: String,
-    match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+    required: true,
+    match: /[0-9]{3}-[0-9]{3}-[0-9]{4}/
   },
   address: {
     type: String,
     maxlength: [200, "Address cannot exceed 200 characters"],
-    required: true,
+    required: true
   },
   dateCreated: {
     type: Date,
     default: Date.now,
-  },
-  dateModified: {
-    type: Date,
-  },
+  }
 });
 
-// Custom validator 
-supplierSchema.path('supplierName').validate(function(val) {
-  return /^[A-Za-z\s]+$/.test(val); // Only allows letters and spaces 
-}, 'Supplier name can only contain letters and spaces');
+// Pre-save hook to increment the supplierId
+// If the document is new, increment the supplierId
+supplierSchema.pre('validate', async function(next) {
+  let doc = this;
 
+  try {
+    const counter = await Counter.findByIdAndUpdate( 
+      { _id: 'supplierId' },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true }
+    );
+    doc.supplierId = counter.seq; next();
+  } catch (err) {
+    console.error('Error in Counter.findByIdAndUpdate:', err); next(err);
+  }
+});
+
+// Creating a supplier model
 const Supplier = mongoose.model("Supplier", supplierSchema);
 
 module.exports = {
-  Supplier
+  Supplier, Counter
 };

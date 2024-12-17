@@ -23,28 +23,6 @@ afterAll(async () => {
 });
 
 describe('Supplier Model Test', () => {
-  it('should validate supplier name correctly', async () => { 
-    const supplierData = {
-      supplierId: 1,
-      supplierName: "TechSupplier 123",
-      contactInformation: "123-456-7890",
-      address: "123 Tech Street"
-    }
-
-    const supplier = new Supplier(supplierData); 
-    let err;
-    
-    try {
-      await supplier.save();
-    } catch (error) {
-      err = error; 
-    }
-    
-    expect(err).toBeDefined();
-    expect(err.errors['supplierName']).toBeDefined();
-    expect(err.errors['supplierName'].message).toBe('Supplier name can only contain letters and spaces');
-  });
-
   it('should fail to create a supplier with a name shorter than 3 characters', async () => { 
     const supplierData = {
       supplierId: 1,
