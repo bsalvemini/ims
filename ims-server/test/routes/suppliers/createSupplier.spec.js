@@ -8,7 +8,7 @@ jest.mock('../../../src/models/supplier'); // Mock the Supplier model
 describe('CreateSupplier API', () => {
   // Unit test 1: should create a supplier successfully.
   it('should create a supplier successfully', async () => {
-    InventoryItem.prototype.save.mockResolvedValue({ _id: '507f1f77bcf86cd799439011' }); // Mock the save method
+    Supplier.prototype.save.mockResolvedValue({ _id: '507f1f77bcf86cd799439011' }); // Mock the save method
     
     const response = await request(app).post('/api/createSupplier').send({
       supplierName: 'Apple',
@@ -16,6 +16,7 @@ describe('CreateSupplier API', () => {
       address: '10600 N Tantau Ave'
     });
 
+    console.log('response', response.body.message);
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Supplier created successfully');
   });
